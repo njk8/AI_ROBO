@@ -1,0 +1,8 @@
+<launch>
+  <!-- Launch a node of type nodelet from the package
+      air_lab0 give it the name "HuskyControlNodelet" -->
+   <node pkg="nodelet" type="nodelet" name="HuskyControlNodelet"
+     args="standalone air_lab1/husky_control_node" >
+   <param name="Kp" value="1.0" />
+  </node>
+</launch>

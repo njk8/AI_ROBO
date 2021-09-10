@@ -1,0 +1,23 @@
+<launch>
+  <!-- Launch a node of type nodelet from the package
+      air_lab0 give it the name "HuskyControlNodelet" -->
+   <node pkg="nodelet" type="nodelet" name="HuskyControlNodelet"
+     args="standalone air_lab1/husky_control_node" >
+   <param name="Kp" value="0.54" />
+   <param name="Ki" value="0.0075" />
+   <param name="Kd" value="0.00038" />
+	</node>
+	
+	<node pkg="air_lab2" type="ls_to_occ" name="ls_to_occ" args="scan:=lidar">
+	<param name="initial_size" value="1.0" />
+	<param name="grid_cell_size" value="0.1" />
+	</node>
+	  
+	<node pkg="air_lab2" type="occ_to_display" name="occ_to_display"/>
+
+	<node pkg="air_lab2" type="motion_planner" name="motion_planner"/>
+
+	<node pkg="air_lab2" type="move_to_point.py" name="move_to_point" args="_robot_frame:=husky0/base_footprint planned_path:=waypoints"/>
+	<node pkg="air_lab3" type="tst_executor.py" name="tst_executor"/>
+  
+</launch>
